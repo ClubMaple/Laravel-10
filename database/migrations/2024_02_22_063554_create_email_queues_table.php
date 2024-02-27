@@ -21,14 +21,14 @@ class CreateEmailQueuesTable extends Migration
             $table->string('view', 50);
             $table->json('params');
             $table->enum('status', ['pending', 'processing', 'completed', 'failed']);
-            $table->timestamps(); // This will create both 'created_at' and 'updated_at' columns
+            $table->timestamps(); 
             $table->dateTime('sent')->nullable(); 
             $table->unsignedSmallInteger('attempt');
         });
     }
 
     /**
-     * Reverse the migrations.
+     * Revertir las migraciones
      *
      * @return void
      */

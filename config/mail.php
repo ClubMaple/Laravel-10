@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'default' => env('MAIL_MAILER', 'smtp'),
+    'default' => env('MAIL_MAILER', 'sparkpost'), //Driver de correo por defecto
 
     /*
     |--------------------------------------------------------------------------
@@ -92,6 +92,12 @@ return [
             'mailers' => [
                 'ses',
                 'postmark',
+            ],
+        ],
+
+        'mailers' => [
+            'sparkpost' => [
+                'transport' => 'sparkpost',
             ],
         ],
     ],
