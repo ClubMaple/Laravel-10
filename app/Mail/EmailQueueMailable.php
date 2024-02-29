@@ -10,18 +10,20 @@ class EmailQueueMailable extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $params; // Parámetros para pasar a la vista
+    public $data; // Parámetros para pasar a la vista
+    public $view; // la vista seleccionada
 
-    public function __construct($params)
+    public function __construct($data, $view = 'default')
     {
-        $this->params = $params;
+        $this->data = $data;
+        $this->view = 'emails.' . $view;
     }
 
     public function build()
     {
-        return $this->view('emails.' . $this->params['view'])
+        return $this->view($this->view)
                     ->with([
-                        'data' => $this->params['data']
+                        'data' => $this->data
                     ]);
     }
 }

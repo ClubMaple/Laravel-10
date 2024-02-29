@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+// TODO: Verificar que las clases esten bien declaradas
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -24,8 +25,6 @@ class EmailQueue extends Model
 
     protected $casts = [
         'params' => 'array',
-        'sent' => 'datetime',
+        'sent'   => 'datetime',
     ];
-
-    
 }

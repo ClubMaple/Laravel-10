@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\EmailQueueController;
+// use App\Http\Controllers\EmailQueueController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,9 +14,3 @@ use App\Http\Controllers\EmailQueueController;
 |
 */
 
-
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::get('/emailqueue', [EmailQueueController::class, 'sendEmail']);
