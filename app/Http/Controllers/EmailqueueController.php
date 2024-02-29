@@ -15,7 +15,7 @@ class EmailqueueController extends Controller
         {
             try {
                 // Obtener los parámetros necesarios para la vista del correo
-                $params = $this->params;
+                $params['data'] = $this->params;
                 $params['view'] = $this->view;
     
                 // Enviar el correo electrónico usando la fachada Mail
