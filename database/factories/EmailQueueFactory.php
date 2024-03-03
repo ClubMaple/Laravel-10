@@ -9,20 +9,52 @@ class EmailQueueFactory extends Factory
 {
     protected $model = EmailQueue::class;
 
+    public function sent()
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'attempt' => $this->faker->numberBetween(1, 5),
+                'status'  => 'completed',
+                'sent'    => $this->faker->dateTimeThisMonth(),
+            ];
+        });
+    }
+
+    public function failed()
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'attempt' => 5,
+                'status'  => 'failed',
+                'sent'    => null,
+            ];
+        });
+    }
+
+    public function pending()
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'attempt' => 0,
+                'status'  => 'pending',
+                'sent'    => null,
+            ];
+        });
+    }
+
     public function definition()
     {
+        $date = $this->faker->dateTimeThisMonth();
+
         return [
-            'linkable_id' => $this->faker->randomNumber(),
-            'linkable_type' => $this->faker->word,
-            'subject' => $this->faker->sentence,
-            'email' => $this->faker->unique()->safeEmail,
-            'view' => 'emails.' . $this->faker->word,
-            'params' => json_encode($this->faker->words(3)),
-            'status' => $this->faker->randomElement(['pending', 'processing', 'completed', 'failed']),
-            'created_at' => $this->faker->dateTimeThisMonth(),
-            'updated_at' => $this->faker->dateTimeThisMonth(),
-            'sent' => $this->faker->boolean ? $this->faker->dateTimeThisMonth() : null,
-            'attempt' => $this->faker->numberBetween(0, 5)
+            'linkable_id'   => $this->faker->randomNumber(),
+            'linkable_type' => $this->faker->randomElement(['App\\Contact', 'App\\Policie']),
+            'subject'       => $this->faker->sentence,
+            'email'         => $this->faker->unique()->safeEmail,
+            'view'          => $this->faker->randomElement(['default', 'payment_failed', 'change_password']),
+            'params'        => json_encode(['name' => $this->faker->name]),
+            'created_at'    => $date,
+            'updated_at'    => $date,
         ];
     }
 }

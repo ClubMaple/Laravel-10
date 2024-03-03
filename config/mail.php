@@ -97,7 +97,11 @@ return [
 
         'mailers' => [
             'sparkpost' => [
-                'transport' => 'sparkpost',
+                'transport'  => 'sparkpost',
+                'from' => [
+                    'address' => 'envios@e.clubmaple.com',
+                    'name'    => 'Equipo Clubmaple',
+                ],
             ],
         ],
     ],

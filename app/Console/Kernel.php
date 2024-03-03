@@ -12,20 +12,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule): void
     {
-        $schedule->call(function () {
-            
-            $emailQueues = EmailQueue::where('status', 'pending')
-                            ->orWhere(function ($query) {
-                                $query->where('status', 'failed')
-                                      ->where('attempt', '<', 3);
-                            })->take(5)->get();
-    
-            
-            foreach ($emailQueues as $emailQueue) {
-                
-                $emailQueue->sendEmail();
-            }
-        })->everyMinute(); 
+        $schedule->call('App\Http\Controllers\EmailqueueController@checkEmails')->everyMinute();
     }
 
     /**
